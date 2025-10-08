@@ -122,25 +122,21 @@
       <form method="POST">
         {% csrf_token %}
         
-        <!-- Username -->
         <div class="input-group">
           <span class="ri-user-line user-icon"></span>
           <input type="text" name="username" placeholder="Username" required>
         </div>
 
-        <!-- Password -->
         <div class="input-group">
           <span class="icon">🔒</span>
           <input type="password" name="password" placeholder="Password" required>
         </div>
 
-        <!-- Remember & Forgot -->
         <div class="options">
           <label><input type="checkbox" name="remember"> Remember me</label>
           <a href="#">Forgot Password?</a>
         </div>
 
-        <!-- Login Button -->
         <button type="submit" class="login-btn">LOGIN</button>
       </form>
     </div>

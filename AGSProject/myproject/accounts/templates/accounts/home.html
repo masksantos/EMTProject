@@ -1,11 +1,209 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Home</title>
+  <title>Dashboard | Sweets N' Treats</title>
+
+  <!-- Font and Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #fffdf7;
+      display: flex;
+      height: 100vh;
+      color: #5A3B2E;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background-color: #FFF3D6;
+      padding: 30px 20px;
+      border-right: 2px solid #d1c4a1;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #5A3B2E;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 16px;
+      transition: 0.2s;
+    }
+
+    .sidebar a:hover {
+      color: #F7A8B8; /* strawberry pink */
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #FFF3D6;
+      padding: 15px 25px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .admin-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      background-color: #EFECE2;
+      padding: 8px 15px;
+      border-radius: 50px;
+    }
+
+    .admin-profile i {
+      background-color: #5A3B2E;
+      color: white;
+      border-radius: 50%;
+      padding: 8px;
+    }
+
+    /* Boxes */
+    .cards {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      flex: 1;
+      text-align: center;
+      border-radius: 20px;
+      padding: 20px;
+      font-weight: 700;
+      color: #5A3B2E;
+      cursor: pointer;
+    }
+
+    .card i {
+      font-size: 40px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .flavors { background-color: #F7A8B8; }
+    .ingredients { background-color: #B58C7E; color: #fff; }
+    .toppings { background-color: #A7E6E2; }
+    .packaging { background-color: #F3D9A4; }
+
+    /* Logs Table */
+    .log-box {
+      background-color: #FFFDF0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .log-box h3 {
+      margin-top: 0;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      border-bottom: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    th {
+      font-weight: 700;
+    }
+
+    tr:hover {
+      background-color: #fdf6ec;
+    }
+
+  </style>
 </head>
 <body>
-  <h1>Welcome, {{ user.username }}!</h1>
-  <a href="{% url 'logout' %}">Logout</a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a href="#"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="#"><i class="fa-solid fa-box"></i> Inventory</a>
+    <a href="#"><i class="fa-solid fa-bell"></i> Notifications</a>
+    <a href="#"><i class="fa-solid fa-clipboard-list"></i> Log history</a>
+    <a href="#"><i class="fa-solid fa-circle-info"></i> About</a>
+  </div>
+
+  <!-- Main content -->
+  <div class="main">
+    <div class="header">
+      <h1>Dashboard</h1>
+      <div class="admin-profile">
+        <span>Admin</span>
+        <i class="fa-solid fa-user"></i>
+      </div>
+    </div>
+
+    <!-- Colored cards -->
+    <div class="cards">
+      <div class="card flavors"><i class="fa-solid fa-ice-cream"></i> Flavors</div>
+      <div class="card ingredients"><i class="fa-solid fa-bowl-food"></i> Ingredients</div>
+      <div class="card toppings"><i class="fa-solid fa-cookie-bite"></i> Toppings</div>
+      <div class="card packaging"><i class="fa-solid fa-box-open"></i> Packaging</div>
+    </div>
+
+    <!-- Logs table -->
+    <div class="log-box">
+      <h3>Logs for Tracking</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Date and time</th>
+            <th>Product name</th>
+            <th>Stock Status</th>
+            <th>Action taken</th>
+            <th>Staff</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for log in logs %}
+          <tr>
+            <td>{{ log.date }}</td>
+            <td>{{ log.product_name }}</td>
+            <td>{{ log.status }}</td>
+            <td>{{ log.action }}</td>
+            <td>{{ log.staff }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5" style="text-align:center;">No logs available.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </body>
 </html>

@@ -2,63 +2,148 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login | MySite</title>
+  <title>Login | Sweets N' Treats</title>
   <style>
     body {
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(to right, #4facfe, #00f2fe);
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #FDECC8; 
+      background-image: radial-gradient(#e1cba1 1px, transparent 1px);
+      background-size: 25px 25px;
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       height: 100vh;
     }
-    .login-box {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      width: 320px;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+    h2 {
+      color: #5A3B2E; 
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 30px;
       text-align: center;
     }
-    input {
-      width: 90%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 6px;
+
+    .login-box {
+      background-color: #FFF7E7; /* Vanilla cream */
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+      width: 350px;
     }
-    button {
-      background: #4facfe;
-      color: white;
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      background-color: #F3D9A4; /* Light caramel */
+      border-radius: 10px;
+      margin-bottom: 20px;
+      padding: 10px 15px;
+    }
+
+    .icon {
+      font-size: 20px;
+      margin-right: 10px;
+      color: #B58C7E; /* Chocolate brown tint */
+    }
+
+    .input-group input {
       border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
+      background: none;
+      outline: none;
+      flex: 1;
+      font-size: 15px;
+      color: #5A3B2E;
+      font-weight: 600;
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      font-size: 14px;
+      color: #5A3B2E;
+    }
+
+    .options a {
+      text-decoration: none;
+      color: #5A3B2E;
+      font-weight: 600;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background-color: #F7A8B8; /* Strawberry pink */
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: 0.3s;
     }
-    button:hover {
-      background: #00c6ff;
+
+    .login-btn:hover {
+      background-color: #f489a2;
     }
+
     .error {
       color: red;
-      font-size: 0.9em;
+      background-color: #ffeaea;
+      border: 1px solid #ffb5b5;
+      padding: 8px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <div class="login-box">
-    <h2>Login</h2>
-    {% if messages %}
-      {% for message in messages %}
-        <p class="error">{{ message }}</p>
-      {% endfor %}
-    {% endif %}
-    <form method="POST">
-      {% csrf_token %}
-      <input type="text" name="username" placeholder="Username" required><br>
-      <input type="password" name="password" placeholder="Password" required><br>
-      <button type="submit">Login</button>
-    </form>
+  <div class="container">
+    <h2>WELCOME TO SWEETS N' TREATS</h2>
+
+    <div class="login-box">
+      {% if messages %}
+        {% for message in messages %}
+          <p class="error">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+
+      <form method="POST">
+        {% csrf_token %}
+        
+        <!-- Username -->
+        <div class="input-group">
+          <span class="icon">👤</span>
+          <input type="text" name="username" placeholder="Username" required>
+        </div>
+
+        <!-- Password -->
+        <div class="input-group">
+          <span class="icon">🔒</span>
+          <input type="password" name="password" placeholder="Password" required>
+        </div>
+
+        <!-- Remember & Forgot -->
+        <div class="options">
+          <label><input type="checkbox" name="remember"> Remember me</label>
+          <a href="#">Forgot Password?</a>
+        </div>
+
+        <!-- Login Button -->
+        <button type="submit" class="login-btn">LOGIN</button>
+      </form>
+    </div>
   </div>
 </body>
 </html>

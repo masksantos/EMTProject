@@ -1,30 +1,33 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import HttpRequest, HttpResponse
 
-def dashboard_home(request):
-    return render(request, 'dashboard/home.html')
-
-def reports(request):
-    return render(request, 'dashboard/reports.html')
-
-<<<<<<< HEAD
-def settings(request):
-    return render(request, 'dashboard/settings.html')
-=======
+def login_view(request: HttpRequest) -> HttpResponse:
+    """Handles user login."""
+    if request.method == "POST":
+        # Using .get() is safer than direct indexing
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        # Authenticate the user
+        user = authenticate(request, username=username, password=password)
+        
         if user is not None:
             login(request, user)
-            return redirect('home')
+            # Redirect to the dashboard home page (name='home' defined in dashboard/urls.py)
+            return redirect('home') 
         else:
-            messages.error(request, 'Invalid username or password.')
-
+            # Display error message on failure
+            messages.error(request, "Invalid username or password")
+    
+    # Render the login form page
     return render(request, 'accounts/login.html')
 
-def logout_view(request):
-    logout(request)
-    return redirect('login')
-
 @login_required
-def home(request):
-    logs = [
-        {"date": "09-29-25", "product_name": "Sprinkles", "status": "Low", "action": "For Restock", "staff": "Staff Jane"},
-    ] 
->>>>>>> 3f2e4059f08fe8e95e55caf3cf6cbf639dacf92b
+def logout_view(request: HttpRequest) -> HttpResponse:
+    """Handles user logout."""
+    logout(request)
+    # Redirect back to the login page (name='login' defined in accounts/urls.py)
+    return redirect('login') 

@@ -39,11 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'dashboard',
-<<<<<<< HEAD
-    
-=======
->>>>>>> 3f2e4059f08fe8e95e55caf3cf6cbf639dacf92b
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

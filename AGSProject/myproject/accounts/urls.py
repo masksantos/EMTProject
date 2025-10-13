@@ -1,14 +1,11 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from . import views
 
+# NOTE: The names 'login' and 'logout' used here must match the names 
+# referenced in your redirect calls in views.py.
 urlpatterns = [
-    path('', views.home, name='home'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
-<<<<<<< HEAD
-    path('admin/', admin.site.urls),
-    path('', include('dashboard.urls')),
-=======
->>>>>>> 3f2e4059f08fe8e95e55caf3cf6cbf639dacf92b
+    
+    # Add any other account-related paths (like signup, password reset) here
 ]

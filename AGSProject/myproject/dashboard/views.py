@@ -1,54 +1,67 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.http import HttpRequest, HttpResponse
 
-def home(request):
+# Ensure all views referenced in dashboard/urls.py are here
+
+@login_required
+def home(request: HttpRequest) -> HttpResponse:
+    """Main dashboard page."""
+    # Note: You may need to pass context data here later if home.html requires it.
     return render(request, 'dashboard/home.html')
 
-def inventory(request):
-    return render(request, 'dashboard/inventory.html')
+@login_required
+def flavors(request: HttpRequest) -> HttpResponse:
+    """Flavors management page."""
+    # Assuming 'flavors.html' needs its own data context here
+    return render(request, 'dashboard/flavors.html')
 
-def notifications(request):
-    return render(request, 'dashboard/notifications.html')
-
-def log_history(request):
-    return render(request, 'dashboard/log_history.html')
-
-def about(request):
-    return render(request, 'dashboard/about.html')
-<<<<<<< HEAD
-
-def flavors(request):
-    # Example context, replace with your actual data
-    context = {}
-    return render(request, 'dashboard/flavors.html', context)
-
-def ingredients(request):
+@login_required
+def ingredients(request: HttpRequest) -> HttpResponse:
+    """Ingredients management page."""
     return render(request, 'dashboard/ingredients.html')
 
-def toppings(request):
+@login_required
+def toppings(request: HttpRequest) -> HttpResponse:
+    """Toppings management page."""
     return render(request, 'dashboard/toppings.html')
 
-def packaging(request):
+@login_required
+def packaging(request: HttpRequest) -> HttpResponse:
+    """Packaging management page."""
     return render(request, 'dashboard/packaging.html')
 
-def login_view(request):
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('home')  # Redirect to home/dashboard page
-        else:
-            messages.error(request, "Invalid username or password")
-    return render(request, 'dashboard/login.html')
+@login_required
+def notifications(request: HttpRequest) -> HttpResponse:
+    """Notifications page."""
+    return render(request, 'dashboard/notifications.html')
 
-# Logout view
-def logout_view(request):
-    logout(request)
-    return redirect('login')
+@login_required
+def log_history(request: HttpRequest) -> HttpResponse:
+    """Log history page."""
+    return render(request, 'dashboard/log_history.html')
 
-# Example home/dashboard view
-def home_view(request):
-    return render(request, 'dashboard/home.html')
-=======
->>>>>>> 3f2e4059f08fe8e95e55caf3cf6cbf639dacf92b
+@login_required
+def about(request: HttpRequest) -> HttpResponse:
+    """About page."""
+    return render(request, 'dashboard/about.html')
+
+@login_required
+def inventory(request: HttpRequest) -> HttpResponse:
+    """Inventory management page. This view now provides mock inventory data."""
+    
+    # Mock data structure matching the loop in inventory.html:
+    # {% for item in inventory %} looks for item.name, item.category, item.stock, item.updated_at
+    mock_inventory = [
+        {'name': 'Strawberry Cake Base', 'category': 'Cakes', 'stock': 25, 'updated_at': '2025-10-13 10:00'},
+        {'name': 'Chocolate Ganache', 'category': 'Toppings', 'stock': 5, 'updated_at': '2025-10-12 15:30'},
+        {'name': 'Rainbow Sprinkles', 'category': 'Ingredients', 'stock': 0, 'updated_at': '2025-10-10 09:15'},
+        {'name': 'Large Cake Boxes', 'category': 'Packaging', 'stock': 45, 'updated_at': '2025-10-13 11:20'},
+    ]
+    
+    context = {
+        'inventory': mock_inventory
+    }
+    
+    # The view now passes the 'inventory' data to the template.
+    return render(request, 'dashboard/inventory.html', context)

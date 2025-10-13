@@ -1,81 +1,99 @@
-<<<<<<< HEAD
 {% extends 'dashboard/home.html' %}
+
 {% block title %}Inventory | Sweets N' Treats{% endblock %}
-{% block content %}
+{% block header_title %}Inventory{% endblock %}
 
-<div class="header">
-  <h1>Inventory</h1>
-  <div class="admin-profile">
-    <span>Admin</span>
-    <i class="fa-solid fa-user"></i>
+{% block content %}
+  <style>
+    /* Styling copied from the About page for consistency */
+    .content-box {
+      background-color: #FFFDF0;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      padding: 25px;
+      margin-top: 20px;
+    }
+
+    .content-box h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #5A3B2E;
+      margin-bottom: 20px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 15px;
+    }
+    th, td {
+      border-bottom: 1px solid #d9d2c3;
+      padding: 12px 10px;
+    }
+    th {
+      background-color: #FFF3D6;
+      font-weight: 700;
+    }
+    tr:hover {
+      background-color: #fdf6ec;
+    }
+    .add-btn {
+      display: inline-block;
+      background-color: #F7A8B8;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 20px;
+      transition: 0.2s;
+    }
+    .add-btn:hover {
+      background-color: #f4899d;
+    }
+  </style>
+
+  <!-- Title for the main content area, assuming home.html handles the 'Inventory' text -->
+  <div class="content-box">
+    <h3>Product Stock Overview</h3>
+    <a href="#" class="add-btn"><i class="fa-solid fa-plus"></i> Add Product</a>
+    
+    <!-- Using a mock 'inventory' context variable, which your view will need to provide -->
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Category</th>
+          <th>Stock Quantity</th>
+          <th>Status</th>
+          <th>Last Updated</th>
+        </tr>
+      </thead>
+      <tbody>
+        {# Mock loop: Your view (views.py) needs to pass a 'inventory' list to the context #}
+        {% for item in inventory %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.category }}</td>
+          <td>{{ item.stock }}</td>
+          <td>
+            {% if item.stock > 10 %}
+              <span style="color: green;">In Stock</span>
+            {% elif item.stock > 0 %}
+              <span style="color: orange;">Low Stock</span>
+            {% else %}
+              <span style="color: red;">Out of Stock</span>
+            {% endif %}
+          </td>
+          <td>{{ item.updated_at }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" style="text-align:center;">No inventory items found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
-</div>
-
-<div class="log-box">
-  <h3>Manage Product Stocks</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Product Name</th>
-        <th>Category</th>
-        <th>Stock Quantity</th>
-        <th>Status</th>
-        <th>Last Updated</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for item in inventory %}
-      <tr>
-        <td>{{ item.name }}</td>
-        <td>{{ item.category }}</td>
-        <td>{{ item.stock }}</td>
-        <td>
-          {% if item.stock > 10 %}
-            <span style="color: green;">In Stock</span>
-          {% elif item.stock > 0 %}
-            <span style="color: orange;">Low Stock</span>
-          {% else %}
-            <span style="color: red;">Out of Stock</span>
-          {% endif %}
-        </td>
-        <td>{{ item.updated_at }}</td>
-      </tr>
-      {% empty %}
-      <tr>
-        <td colspan="5" style="text-align:center;">No inventory items found.</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-
-=======
-{% block title %}Inventory{% endblock %}
-{% block content %}
-<h1>Inventory Management</h1>
-<p>Here is a list of available items in stock:</p>
-
-<table>
-  <tr>
-    <th>Item Name</th>
-    <th>Quantity</th>
-    <th>Status</th>
-  </tr>
-  <tr>
-    <td>Printer Ink</td>
-    <td>10</td>
-    <td>In Stock</td>
-  </tr>
-  <tr>
-    <td>Paper Ream</td>
-    <td>2</td>
-    <td>Low Stock</td>
-  </tr>
-  <tr>
-    <td>Mouse</td>
-    <td>15</td>
-    <td>In Stock</td>
-  </tr>
-</table>
->>>>>>> 3f2e4059f08fe8e95e55caf3cf6cbf639dacf92b
-{% endblock %}
+{% endblock content %}

@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
   <title>Login | Sweets N' Treats</title>
   <style>
     body {
@@ -50,11 +49,12 @@
       padding: 10px 15px;
     }
 
-    .span.icon, .user-icon {
-      font-size: 18px;
-      color: #FE9695;
+    .icon {
+      font-size: 20px;
       margin-right: 10px;
+      color: #B58C7E; /* Chocolate brown tint */
     }
+
     .input-group input {
       border: none;
       background: none;
@@ -122,21 +122,25 @@
       <form method="POST">
         {% csrf_token %}
         
+        <!-- Username -->
         <div class="input-group">
-          <span class="ri-user-line user-icon"></span>
+          <span class="icon">👤</span>
           <input type="text" name="username" placeholder="Username" required>
         </div>
 
+        <!-- Password -->
         <div class="input-group">
-          <span class="icon">🔒</span>
+          <span class="icon"></span>
           <input type="password" name="password" placeholder="Password" required>
         </div>
 
+        <!-- Remember & Forgot -->
         <div class="options">
           <label><input type="checkbox" name="remember"> Remember me</label>
           <a href="#">Forgot Password?</a>
         </div>
 
+        <!-- Login Button -->
         <button type="submit" class="login-btn">LOGIN</button>
       </form>
     </div>

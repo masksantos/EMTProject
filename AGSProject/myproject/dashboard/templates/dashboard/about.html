@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'dashboard/home.html' %}
 
 {% block title %}About | Sweets N' Treats{% endblock %}
@@ -74,3 +75,22 @@
     </div>
   </div>
 {% endblock %}
+=======
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}About{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'dashboard/style.css' %}">
+</head>
+<body>
+{% block content %}
+<h1>About This Dashboard</h1>
+<p>This system was built using <strong>Django</strong> to help manage office resources efficiently.</p>
+<p>It provides real-time tracking of inventory, user activity logs, and system notifications.</p>
+<p>Version: 1.0.0</p>
+{% endblock %}
+</body>
+</html>
+>>>>>>> 3f2e4059f08fe8e95e55caf3cf6cbf639dacf92b

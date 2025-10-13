@@ -14,6 +14,7 @@ def log_history(request):
 
 def about(request):
     return render(request, 'dashboard/about.html')
+<<<<<<< HEAD
 
 def flavors(request):
     # Example context, replace with your actual data
@@ -49,3 +50,5 @@ def logout_view(request):
 # Example home/dashboard view
 def home_view(request):
     return render(request, 'dashboard/home.html')
+=======
+>>>>>>> 3f2e4059f08fe8e95e55caf3cf6cbf639dacf92b

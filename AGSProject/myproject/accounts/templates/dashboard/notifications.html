@@ -1,0 +1,56 @@
+{% extends 'dashboard/home.html' %}
+{% block content %}
+  <style>
+    .notifications-box {
+      background-color: #fffaf0;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 80%;
+      margin: 40px auto;
+    }
+
+    .notifications-box h2 {
+      text-align: center;
+      color: #6b4226;
+      margin-bottom: 20px;
+    }
+
+    .notification {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+      border: 1px solid #f5d7b5;
+      border-radius: 12px;
+      padding: 12px 20px;
+      margin-bottom: 10px;
+    }
+
+    .notification p {
+      margin: 0;
+      color: #4b3b2a;
+    }
+
+    .time {
+      font-size: 13px;
+      color: #7a6e5e;
+    }
+  </style>
+
+  <div class="notifications-box">
+    <h2>Recent Notifications</h2>
+
+    {% for note in notifications %}
+    <div class="notification">
+      <div>
+        <p>{{ note.message }}</p>
+        <span class="time">{{ note.time }}</span>
+      </div>
+      <i class="fa-solid fa-bell" style="color:#F7A8B8;"></i>
+    </div>
+    {% empty %}
+    <p style="text-align:center;">No notifications yet.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

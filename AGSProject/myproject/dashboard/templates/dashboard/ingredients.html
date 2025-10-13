@@ -1,0 +1,69 @@
+{% extends 'dashboard/home.html' %}
+
+{% block title %}Ingredients | Sweets N' Treats{% endblock %}
+{% block content %}
+<h1>Ingredients</h1>
+  <p>Manage your ingredients here.</p>
+{% endblock %}
+  <style>
+    .content-container {
+      background-color: #FFFDF0;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      padding: 25px;
+    }
+    .content-container h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #5A3B2E;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 15px;
+    }
+    th, td {
+      border-bottom: 1px solid #d9d2c3;
+      padding: 12px 10px;
+    }
+    th {
+      background-color: #FFF3D6;
+      font-weight: 700;
+    }
+    tr:hover {
+      background-color: #fdf6ec;
+    }
+    .add-btn {
+      display: inline-block;
+      background-color: #B58C7E;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 20px;
+      transition: 0.2s;
+    }
+    .add-btn:hover {
+      background-color: #a67b6a;
+    }
+  </style>
+
+  <div class="content-container">
+    <h2>Ingredients Management</h2>
+    <a href="#" class="add-btn"><i class="fa-solid fa-plus"></i> Add Ingredient</a>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Ingredient Name</th>
+          <th>Supplier</th>
+          <th>Stock</th>
+          <th>Status</th>
+          <th>Last Updated</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ingredient in ingr

@@ -5,8 +5,9 @@
   <meta charset="UTF-8">
   <title>Dashboard | Sweets N' Treats</title>
 
-  <!-- Font and Icons -->
+  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     body {
       margin: 0;
@@ -47,6 +48,7 @@
     .main {
       flex: 1;
       padding: 30px;
+      overflow-y: auto;
     }
 
     .header {
@@ -82,7 +84,7 @@
       padding: 8px;
     }
 
-    /* Boxes */
+    /* Dashboard cards */
     .cards {
       display: flex;
       gap: 20px;
@@ -97,6 +99,11 @@
       font-weight: 700;
       color: #5A3B2E;
       cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
     }
 
     .card i {
@@ -142,18 +149,17 @@
     tr:hover {
       background-color: #fdf6ec;
     }
-
   </style>
 </head>
 <body>
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <a href="#"><i class="fa-solid fa-house"></i> Home</a>
-    <a href="#"><i class="fa-solid fa-box"></i> Inventory</a>
-    <a href="#"><i class="fa-solid fa-bell"></i> Notifications</a>
-    <a href="#"><i class="fa-solid fa-clipboard-list"></i> Log history</a>
-    <a href="#"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="{% url 'home' %}"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="{% url 'inventory' %}"><i class="fa-solid fa-box"></i> Inventory</a>
+    <a href="{% url 'notifications' %}"><i class="fa-solid fa-bell"></i> Notifications</a>
+    <a href="{% url 'log_history' %}"><i class="fa-solid fa-clipboard-list"></i> Log History</a>
+    <a href="{% url 'about' %}"><i class="fa-solid fa-circle-info"></i> About</a>
   </div>
 
   <!-- Main content -->
@@ -166,12 +172,12 @@
       </div>
     </div>
 
-    <!-- Colored cards -->
+    <!-- Dashboard cards -->
     <div class="cards">
-      <div class="card flavors"><i class="fa-solid fa-ice-cream"></i> Flavors</div>
-      <div class="card ingredients"><i class="fa-solid fa-bowl-food"></i> Ingredients</div>
-      <div class="card toppings"><i class="fa-solid fa-cookie-bite"></i> Toppings</div>
-      <div class="card packaging"><i class="fa-solid fa-box-open"></i> Packaging</div>
+      <a href="{% url 'flavors' %}" class="card flavors"><i class="fa-solid fa-ice-cream"></i> Flavors</a>
+      <a href="{% url 'ingredients' %}" class="card ingredients"><i class="fa-solid fa-bowl-food"></i> Ingredients</a>
+      <a href="{% url 'toppings' %}" class="card toppings"><i class="fa-solid fa-cookie-bite"></i> Toppings</a>
+      <a href="{% url 'packaging' %}" class="card packaging"><i class="fa-solid fa-box-open"></i> Packaging</a>
     </div>
 
     <!-- Logs table -->
@@ -205,5 +211,6 @@
       </table>
     </div>
   </div>
+
 </body>
 </html>

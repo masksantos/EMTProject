@@ -1,0 +1,93 @@
+{% extends 'dashboard/home.html' %}
+
+{% block title %}Packaging | Sweets N' Treats{% endblock %}
+{% block content %}
+<h1>Packaging</h1>
+  <p>Manage your packaging here.</p>
+{% endblock %}
+  <style>
+    .content-container {
+      background-color: #FFFDF0;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      padding: 25px;
+    }
+    .content-container h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #5A3B2E;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 15px;
+    }
+    th, td {
+      border-bottom: 1px solid #d9d2c3;
+      padding: 12px 10px;
+    }
+    th {
+      background-color: #FFF3D6;
+      font-weight: 700;
+    }
+    tr:hover {
+      background-color: #fdf6ec;
+    }
+    .add-btn {
+      display: inline-block;
+      background-color: #F3D9A4;
+      color: #333;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 20px;
+      transition: 0.2s;
+    }
+    .add-btn:hover {
+      background-color: #eacb8e;
+    }
+  </style>
+
+  <div class="content-container">
+    <h2>Packaging Management</h2>
+    <a href="#" class="add-btn"><i class="fa-solid fa-plus"></i> Add Packaging</a>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Type</th>
+          <th>Stock</th>
+          <th>Status</th>
+          <th>Last Updated</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in packaging %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.type }}</td>
+          <td>{{ item.stock }}</td>
+          <td>
+            {% if item.stock > 10 %}
+              <span style="color: green;">In Stock</span>
+            {% elif item.stock > 0 %}
+              <span style="color: orange;">Low Stock</span>
+            {% else %}
+              <span style="color: red;">Out of Stock</span>
+            {% endif %}
+          </td>
+          <td>{{ item.updated_at }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" style="text-align:center;">No packaging items found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

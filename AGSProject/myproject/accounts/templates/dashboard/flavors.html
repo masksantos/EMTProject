@@ -1,0 +1,93 @@
+{% extends 'dashboard/home.html' %}
+
+{% block title %}Flavors | Sweets N' Treats{% endblock %}
+{% block content %}
+ <h1>Flavors</h1>
+  <p>Manage your flavor options here.</p>
+{% endblock %}
+  <style>
+    .content-container {
+      background-color: #FFFDF0;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      padding: 25px;
+    }
+    .content-container h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #5A3B2E;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 15px;
+    }
+    th, td {
+      border-bottom: 1px solid #d9d2c3;
+      padding: 12px 10px;
+    }
+    th {
+      background-color: #FFF3D6;
+      font-weight: 700;
+    }
+    tr:hover {
+      background-color: #fdf6ec;
+    }
+    .add-btn {
+      display: inline-block;
+      background-color: #F7A8B8;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 20px;
+      transition: 0.2s;
+    }
+    .add-btn:hover {
+      background-color: #f4899d;
+    }
+  </style>
+
+  <div class="content-container">
+    <h2>Flavors Management</h2>
+    <a href="#" class="add-btn"><i class="fa-solid fa-plus"></i> Add Flavor</a>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Flavor Name</th>
+          <th>Category</th>
+          <th>Stock</th>
+          <th>Status</th>
+          <th>Last Updated</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for flavor in flavors %}
+        <tr>
+          <td>{{ flavor.name }}</td>
+          <td>{{ flavor.category }}</td>
+          <td>{{ flavor.stock }}</td>
+          <td>
+            {% if flavor.stock > 10 %}
+              <span style="color: green;">In Stock</span>
+            {% elif flavor.stock > 0 %}
+              <span style="color: orange;">Low Stock</span>
+            {% else %}
+              <span style="color: red;">Out of Stock</span>
+            {% endif %}
+          </td>
+          <td>{{ flavor.updated_at }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" style="text-align:center;">No flavors available.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

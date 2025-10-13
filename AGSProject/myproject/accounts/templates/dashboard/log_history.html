@@ -1,0 +1,70 @@
+{% extends 'dashboard/home.html' %}
+{% block content %}
+  <style>
+    .log-box {
+      background-color: #fffaf0;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 85%;
+      margin: 40px auto;
+    }
+
+    .log-box h2 {
+      text-align: center;
+      color: #6b4226;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: #f7a8b8;
+      color: white;
+    }
+
+    th, td {
+      text-align: center;
+      padding: 12px;
+      border-bottom: 1px solid #f1e3d3;
+    }
+
+    tr:hover {
+      background-color: #fff1f1;
+    }
+  </style>
+
+  <div class="log-box">
+    <h2>Log History</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Date and Time</th>
+          <th>Activity</th>
+          <th>User</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for log in logs %}
+        <tr>
+          <td>{{ log.date }}</td>
+          <td>{{ log.activity }}</td>
+          <td>{{ log.user }}</td>
+          <td>{{ log.action }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4">No logs yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

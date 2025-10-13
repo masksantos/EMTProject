@@ -27,4 +27,3 @@ def home(request):
     logs = [
         {"date": "09-29-25", "product_name": "Sprinkles", "status": "Low", "action": "For Restock", "staff": "Staff Jane"},
     ] 
-    return render(request, 'accounts/home.html')

@@ -37,9 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Custom apps
     'accounts',
     'dashboard',
+    'sidebar',
 ]
+
+# Templates directory (optional if using app folders)
+TEMPLATES[0]['DIRS'] = [BASE_DIR / 'templates']
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'login'
+
 
 
 MIDDLEWARE = [

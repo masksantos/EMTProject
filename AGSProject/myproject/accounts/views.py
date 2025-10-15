@@ -1,33 +1,24 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpRequest, HttpResponse
+from django.contrib import messages
 
-def login_view(request: HttpRequest) -> HttpResponse:
-    """Handles user login."""
-    if request.method == "POST":
-        # Using .get() is safer than direct indexing
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        
-        # Authenticate the user
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
         user = authenticate(request, username=username, password=password)
-        
-        if user is not None:
+        if user:
             login(request, user)
-            # Redirect to the dashboard home page (name='home' defined in dashboard/urls.py)
-            return redirect('home') 
+            return redirect('home')
         else:
-            # Display error message on failure
-            messages.error(request, "Invalid username or password")
-    
-    # Render the login form page
+            messages.error(request, 'Invalid credentials')
     return render(request, 'accounts/login.html')
 
-@login_required
-def logout_view(request: HttpRequest) -> HttpResponse:
-    """Handles user logout."""
+def logout_view(request):
     logout(request)
-    # Redirect back to the login page (name='login' defined in accounts/urls.py)
-    return redirect('login') 
+    return redirect('login')
+
+@login_required
+def profile_view(request):
+    return render(request, 'accounts/profile.html')
